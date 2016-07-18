@@ -34,6 +34,11 @@ alias b='bundle'
 alias be='bundle exec'
 alias bet='RAILS_ENV=test bundle exec'
 
+# Directory traversing
+alias mgmt='cd /srv/mgmt/current'
+alias cms='cd /srv/rug/current'
+alias landing='cd /srv/landing/current'
+
 # Tailing logs
 alias development='tail -f -n 100 log/development.log'
 alias production='tail -f -n 100 log/production.log'
