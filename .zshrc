@@ -26,7 +26,29 @@ source $ZSH/oh-my-zsh.sh
 plugins+=(zsh-completions)
 autoload -U compinit && compinit
 
-alias zopen="subl ~/.zshrc"
+# Dotfile config
+function symlink_dotfiles {
+  echo "You may provide a path if the default of ~/Sites/dotfiles is not correct."
+  echo $1
+  if ! [ -z "$1" ]; then
+    dotfile_path=$1
+  else
+    dotfile_path=~/Sites/dotfiles
+  fi
+  
+  pushd ~
+
+  # zsh
+  rm ~/.zshrc
+  ln -s $dotfile_path/.zshrc
+  rm ~/.tmux.conf
+  ln -s $dotfile_path/.tmux.conf
+  rm ~/.vimrc
+  ln -s $dotfile_path/.vimrc
+
+  popd
+}
+alias zopen="vi ~/.zshrc"
 alias zsource="source ~/.zshrc"
 
 # Rails-isms
