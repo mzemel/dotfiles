@@ -27,6 +27,12 @@ plugins+=(zsh-completions)
 autoload -U compinit && compinit
 
 # Dotfile config
+function list_commands {
+  echo "install_oh_my_zsh"
+  echo "symlink_dotfiles [DOTFILES_DIR]"
+  echo "install_vim_plugins"
+}
+
 function symlink_dotfiles {
   echo "You may provide a path if the default of ~/Sites/dotfiles is not correct."
   echo $1
@@ -36,18 +42,29 @@ function symlink_dotfiles {
     dotfile_path=~/Sites/dotfiles
   fi
   
-  pushd ~
+  cd ~ 
 
-  # zsh
-  rm ~/.zshrc
+  rm -f ~/.zshrc && rm -f ~/.tmux.conf && rm -f ~/.vimrc
   ln -s $dotfile_path/.zshrc
-  rm ~/.tmux.conf
   ln -s $dotfile_path/.tmux.conf
-  rm ~/.vimrc
   ln -s $dotfile_path/.vimrc
-
-  popd
 }
+
+function install_oh_my_zsh {
+  if ! [ -z "$(which zsh)" ]; then
+    echo "You must install zsh first"
+    exit
+  fi
+
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+}
+
+function install_vim_plugins {
+  mkdir -p ~/.vim && cd ~/.vim
+  git clone https://github.com/ctrlpvim/ctrlp.vim.git bundle/ctrlp.vim
+  git clone git://github.com/vim-ruby/vim-ruby.git ~/.vim/bundle/vim-ruby
+}
+
 alias zopen="vi ~/.zshrc"
 alias zsource="source ~/.zshrc"
 
@@ -70,3 +87,5 @@ export PM_CHEF="/Users/michael.zemel/Sites/pm_chef"
 export PATH=$HOME/.rbenv/shims:$PATH
 export PATH="/opt/puppetlabs/bin:$PATH"
 export PATH="/opt/chefdk/bin:$PATH"
+
+source ~/.poke_profile
