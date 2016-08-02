@@ -65,6 +65,20 @@ function install_vim_plugins {
   git clone git://github.com/vim-ruby/vim-ruby.git ~/.vim/bundle/vim-ruby
 }
 
+function fuckin_push {
+  branch=$( git rev-parse --abbrev-ref HEAD )
+  if [ "$branch" = "master" ]; then
+    echo "You're on master, you fool"
+  else  
+    git push -f origin $branch
+  fi
+}
+
+function fuckin_pull {
+  branch=$( git rev-parse --abbrev-ref HEAD )
+  git fetch origin && git reset --hard origin/$branch
+}
+
 alias zopen="vi ~/.zshrc"
 alias zsource="source ~/.zshrc"
 
