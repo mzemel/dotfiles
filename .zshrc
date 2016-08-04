@@ -70,6 +70,8 @@ function fuckin_push {
   if [ "$branch" = "master" ]; then
     echo "You're on master, you fool"
   else  
+    git add app/ lib/ spec/
+    git commit -c ORIG_HEAD
     git push -f origin $branch
   fi
 }
@@ -102,4 +104,3 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH="/opt/puppetlabs/bin:$PATH"
 export PATH="/opt/chefdk/bin:$PATH"
 
-source ~/.poke_profile
