@@ -65,18 +65,17 @@ function install_vim_plugins {
   git clone git://github.com/vim-ruby/vim-ruby.git ~/.vim/bundle/vim-ruby
 }
 
-function fuckin_push {
+function up {
   branch=$( git rev-parse --abbrev-ref HEAD )
   if [ "$branch" = "master" ]; then
     echo "You're on master, you fool"
   else  
-    git add app/ lib/ spec/
     git commit -c ORIG_HEAD
     git push -f origin $branch
   fi
 }
 
-function fuckin_pull {
+function down {
   branch=$( git rev-parse --abbrev-ref HEAD )
   git fetch origin && git reset --hard origin/$branch
 }
