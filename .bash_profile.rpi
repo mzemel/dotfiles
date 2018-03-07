@@ -1,0 +1,3 @@
+setxkbmap -layout us
+alias record="arecord /home/pi/input.wav -D sysdefault:CARD=1"
+alias playback="omxplayer -o local /home/pi/local.wav"
