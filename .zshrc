@@ -70,7 +70,18 @@ function up {
   if [ "$branch" = "master" ]; then
     echo "You're on master, you fool"
   else  
-    git commit -c ORIG_HEAD
+    git push -f origin $branch
+  fi
+}
+
+
+function fup {
+  branch=$( git rev-parse --abbrev-ref HEAD )
+  if [ "$branch" = "master" ]; then
+    echo "You're on master, you fool"
+  else  
+    git add .
+    git commit --amend
     git push -f origin $branch
   fi
 }
@@ -82,11 +93,22 @@ function down {
 
 alias zopen="vi ~/.zshrc"
 alias zsource="source ~/.zshrc"
+alias sum="subl /Volumes/srv/mgmt/local"
+alias sul="subl /Volumes/srv/landing/local"
+alias suc="subl ~/Sites/cms"
+alias dew="docker-compose exec web"
+alias des="docker-compose exec sneakers"
+alias del="docker-compose logs -f"
+
+alias standup="open https://zoom.us/j/538555316"
+alias coverage="open /Volumes/srv/mgmt/local/coverage/index.html"
 
 # Rails-isms
 alias b='bundle'
 alias be='bundle exec'
 alias bet='RAILS_ENV=test bundle exec'
+alias ber='bundle exec rspec'
+alias rber='docker-compose run -e "RAILS_ENV=test" web bundle exec rspec'
 
 # Directory traversing
 alias mgmt='cd /srv/mgmt/current'
@@ -103,3 +125,19 @@ export PATH=$HOME/.rbenv/shims:$PATH
 export PATH="/opt/puppetlabs/bin:$PATH"
 export PATH="/opt/chefdk/bin:$PATH"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/michael.zemel/Downloads/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/michael.zemel/Downloads/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/michael.zemel/Downloads/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/michael.zemel/Downloads/google-cloud-sdk/completion.zsh.inc'
+fi
+
+source ~/.bin/tmuxinator.zsh
+export PATH="/usr/local/opt/openssl/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export EDITOR='vim'
+source .zshrc.phishme
