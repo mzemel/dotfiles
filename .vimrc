@@ -7,14 +7,25 @@ let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_working_path_mode = 'ra'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
+" Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+"
+" " Declare the list of plugins.
+" Plug 'tpope/vim-sensible'
+" Plug 'junegunn/seoul256.vim'
+"
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'kien/ctrlp.vim'
+"
+" " List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
 " Ruby-Vim
 set nocompatible      " We're running Vim, not Vi!
 syntax on             " Enable syntax highlighting
 filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
-
-
 set tabstop=2 shiftwidth=2 expandtab
 
 " Enable Tab and Shift+Tab to indent/unindent code
