@@ -1,12 +1,5 @@
 set relativenumber
 
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-
 " Plugins will be downloaded under the specified directory.
 call plug#begin('~/.vim/plugged')
 "
@@ -15,7 +8,10 @@ call plug#begin('~/.vim/plugged')
 " Plug 'junegunn/seoul256.vim'
 "
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'kien/ctrlp.vim'
+Plug '~/.fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'zhaocai/GoldenView.Vim'
+
 "
 " " List ends here. Plugins become visible to Vim after this call.
 call plug#end()
@@ -27,6 +23,14 @@ filetype on           " Enable filetype detection
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 set tabstop=2 shiftwidth=2 expandtab
+
+"GoldenView
+nmap <silent> <F9> <Plug>GoldenViewSwitchToggle
+nnoremap <silent> <C-j> :vertical resize -15<CR>
+nnoremap <silent> <C-k> :vertical resize +15<CR>
+
+" FZF
+nnoremap <C-o> :Files<CR>
 
 " Enable Tab and Shift+Tab to indent/unindent code
 nnoremap <Tab> >>_

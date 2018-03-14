@@ -136,8 +136,9 @@ if [ -f /Users/michael.zemel/Downloads/google-cloud-sdk/completion.zsh.inc ]; th
   source '/Users/michael.zemel/Downloads/google-cloud-sdk/completion.zsh.inc'
 fi
 
-source ~/.bin/tmuxinator.zsh
 export PATH="/usr/local/opt/openssl/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export EDITOR='vim'
-source .zshrc.phishme
+source ~/.zshrc.phishme
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
